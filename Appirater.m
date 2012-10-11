@@ -144,11 +144,16 @@ static id<AppiraterDelegate> _delegate;
 }
 
 - (void)showRatingAlert {
+    // SA - forcing vertical layout
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:APPIRATER_MESSAGE_TITLE
 														 message:APPIRATER_MESSAGE
 														delegate:self
-											   cancelButtonTitle:APPIRATER_CANCEL_BUTTON
-											   otherButtonTitles:APPIRATER_RATE_BUTTON, APPIRATER_RATE_LATER, nil];
+											   cancelButtonTitle:APPIRATER_RATE_LATER
+											   otherButtonTitles:APPIRATER_RATE_BUTTON, APPIRATER_CANCEL_BUTTON, nil];
+    
+    // for a 2 button layout
+    //[[alertView viewWithTag:1] removeFromSuperview];
+    
 	self.ratingAlert = alertView;
 	[alertView show];
 	
@@ -379,16 +384,16 @@ static id<AppiraterDelegate> _delegate;
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	
 	switch (buttonIndex) {
-		case 0:
-		{
-			// they don't want to rate it
-			[userDefaults setBool:YES forKey:kAppiraterDeclinedToRate];
+        case 0:
+        {
+			// remind them later
+			[userDefaults setDouble:[[NSDate date] timeIntervalSince1970] forKey:kAppiraterReminderRequestDate];
 			[userDefaults synchronize];
-			if(self.delegate && [self.delegate respondsToSelector:@selector(appiraterDidDeclineToRate:)]){
-				[self.delegate appiraterDidDeclineToRate:self];
+			if(self.delegate && [self.delegate respondsToSelector:@selector(appiraterDidOptToRemindLater:)]){
+				[self.delegate appiraterDidOptToRemindLater:self];
 			}
 			break;
-		}
+        }
 		case 1:
 		{
 			// they want to rate it
@@ -398,17 +403,29 @@ static id<AppiraterDelegate> _delegate;
 			}
 			break;
 		}
-		case 2:
-			// remind them later
-			[userDefaults setDouble:[[NSDate date] timeIntervalSince1970] forKey:kAppiraterReminderRequestDate];
+        case 2:
+		{
+			// they don't want to rate it
+			[userDefaults setBool:YES forKey:kAppiraterDeclinedToRate];
 			[userDefaults synchronize];
-			if(self.delegate && [self.delegate respondsToSelector:@selector(appiraterDidOptToRemindLater:)]){
-				[self.delegate appiraterDidOptToRemindLater:self];
+			if(self.delegate && [self.delegate respondsToSelector:@selector(appiraterDidDeclineToRate:)]){
+				[self.delegate appiraterDidDeclineToRate:self];
 			}
 			break;
+		}
 		default:
 			break;
 	}
 }
+
+/*
+- (void)willPresentAlertView:(UIAlertView *)alertView
+{
+    CGRect frame = alertView.frame;
+    [alertView setFrame:CGRectMake(frame.origin.x,
+                                   frame.origin.y,
+                                   frame.size.width,
+                                   260)];
+}*/
 
 @end

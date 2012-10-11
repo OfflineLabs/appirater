@@ -48,7 +48,7 @@ extern NSString *const kAppiraterReminderRequestDate;
 /*
  Your localized app's name.
  */
-#define APPIRATER_LOCALIZED_APP_NAME    [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:(NSString *)kCFBundleNameKey]
+#define APPIRATER_LOCALIZED_APP_NAME    @"Sōsh"
 
 /*
  Your app's name.
@@ -71,18 +71,19 @@ extern NSString *const kAppiraterReminderRequestDate;
 /*
  The text of the button that rejects reviewing the app.
  */
-#define APPIRATER_CANCEL_BUTTON			NSLocalizedStringFromTable(@"No, Thanks", @"AppiraterLocalizable", nil)
+#define APPIRATER_CANCEL_BUTTON			NSLocalizedStringFromTable(@"No Thanks, I Have Feedback", @"AppiraterLocalizable", nil)
 
 /*
  Text of button that will send user to app review page.
  */
-#define APPIRATER_LOCALIZED_RATE_BUTTON NSLocalizedStringFromTable(@"Rate %@", @"AppiraterLocalizable", nil)
+#define APPIRATER_LOCALIZED_RATE_BUTTON NSLocalizedStringFromTable(@"Sure, I Like %@ for iPhone", @"AppiraterLocalizable", nil)
 #define APPIRATER_RATE_BUTTON			[NSString stringWithFormat:APPIRATER_LOCALIZED_RATE_BUTTON, APPIRATER_APP_NAME]
 
 /*
  Text for button to remind the user to review later.
  */
 #define APPIRATER_RATE_LATER			NSLocalizedStringFromTable(@"Remind me later", @"AppiraterLocalizable", nil)
+//#define APPIRATER_RATE_LATER			nil
 
 @interface Appirater : NSObject <UIAlertViewDelegate> {
 
