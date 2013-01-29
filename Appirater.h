@@ -59,7 +59,7 @@ extern NSString *const kAppiraterReminderRequestDate;
  This is the message your users will see once they've passed the day+launches
  threshold.
  */
-#define APPIRATER_LOCALIZED_MESSAGE     NSLocalizedStringFromTable(@"If you enjoy using %@, would you mind taking a moment to rate it? It won't take more than a minute. Thanks for your support!", @"AppiraterLocalizable", nil)
+#define APPIRATER_LOCALIZED_MESSAGE     NSLocalizedStringFromTable(@"We're working hard to make Sōsh better every day. If you enjoy using the app, would you mind taking a minute to rate it? Thanks!", @"AppiraterLocalizable", nil)
 #define APPIRATER_MESSAGE				[NSString stringWithFormat:APPIRATER_LOCALIZED_MESSAGE, APPIRATER_APP_NAME]
 
 /*
@@ -71,18 +71,18 @@ extern NSString *const kAppiraterReminderRequestDate;
 /*
  The text of the button that rejects reviewing the app.
  */
-#define APPIRATER_CANCEL_BUTTON			NSLocalizedStringFromTable(@"No Thanks, I Have Feedback", @"AppiraterLocalizable", nil)
+#define APPIRATER_CANCEL_BUTTON			NSLocalizedStringFromTable(@"No Thanks", @"AppiraterLocalizable", nil)
 
 /*
  Text of button that will send user to app review page.
  */
-#define APPIRATER_LOCALIZED_RATE_BUTTON NSLocalizedStringFromTable(@"Sure, I Like %@ for iPhone", @"AppiraterLocalizable", nil)
+#define APPIRATER_LOCALIZED_RATE_BUTTON NSLocalizedStringFromTable(@"Rate Sōsh", @"AppiraterLocalizable", nil)
 #define APPIRATER_RATE_BUTTON			[NSString stringWithFormat:APPIRATER_LOCALIZED_RATE_BUTTON, APPIRATER_APP_NAME]
 
 /*
  Text for button to remind the user to review later.
  */
-#define APPIRATER_RATE_LATER			NSLocalizedStringFromTable(@"Remind me later", @"AppiraterLocalizable", nil)
+#define APPIRATER_RATE_LATER			NSLocalizedStringFromTable(@"Send Feedback", @"AppiraterLocalizable", nil)
 //#define APPIRATER_RATE_LATER			nil
 
 @interface Appirater : NSObject <UIAlertViewDelegate> {

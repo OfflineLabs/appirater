@@ -386,9 +386,12 @@ static id<AppiraterDelegate> _delegate;
 	switch (buttonIndex) {
         case 0:
         {
-			// remind them later
-			[userDefaults setDouble:[[NSDate date] timeIntervalSince1970] forKey:kAppiraterReminderRequestDate];
+            // "send feedback" case
+            // we won't remind in this case either
+            [userDefaults setBool:YES forKey:kAppiraterDeclinedToRate];
 			[userDefaults synchronize];
+			//[userDefaults setDouble:[[NSDate date] timeIntervalSince1970] forKey:kAppiraterReminderRequestDate];
+			//[userDefaults synchronize];
 			if(self.delegate && [self.delegate respondsToSelector:@selector(appiraterDidOptToRemindLater:)]){
 				[self.delegate appiraterDidOptToRemindLater:self];
 			}
